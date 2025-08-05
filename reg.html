@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Registration Form</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #f4f4f4;
+padding: 30px;
+}
+h2 {
+color: #333;
+}
+
+form {
+background: #fff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+max-width: 600px;
+margin: auto;
+}
+
+label {
+display: block;
+margin-top: 10px;
+font-weight: bold;
+}
+
+input, select, textarea {
+width: 100%;
+padding: 8px;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+button {
+margin-top: 15px;
+padding: 10px 20px;
+border: none;
+border-radius: 4px;
+background-color: #fffdfd;
+color: white;
+font-size: 16px;
+cursor: pointer;
+}
+
+button:hover {
+background-color: #ff0000;
+}
+
+#submittedData {
+margin-top: 30px;
+background-color: #ff0202;
+padding: 20px;
+border-radius: 10px;
+display: none;
+}
+
+.error {
+color: rgb(252, 4, 4);
+font-size: 14px;
+}
+
+#returnBtn {
+background-color: #fd0909;
+}
+
+#returnBtn:hover {
+background-color: #c82333;
+}
+</style>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form id="registrationForm">
+<label>First Name:</label>
+<input type="text" id="name" required>
+<label>Last Name:</label>
+<input type="text" id="lastname" required>
+
+<label>Father's Name:</label>
+<input type="text" id="fatherName" required>
+
+<label>Mother's Name:</label>
+<input type="text" id="motherName" required>
+
+<label>Email:</label>
+<input type="email" id="email" required>
+
+<label>Phone Number:</label>
+<input type="tel" id="phone" required>
+
+<label>Date of Birth:</label>
+<input type="date" id="dob" required>
+
+<label>Gender:</label>
+<select id="gender" required>
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<label>Address:</label>
+<textarea id="address" required></textarea>
+
+<label>Course:</label>
+<input type="text" id="course" required>
+
+<label>Year of Study:</label>
+<select id="year" required>
+<option value="">Select Year</option>
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+</select>
+
+<p class="error" id="errorMsg"></p>
+
+<button type="submit">Submit</button>
+<button type="button" id="returnBtn">Return</button>
+</form>
+
+<div id="submittedData"></div>
+
+<script>
+const form = document.getElementById('registrationForm');
+const submittedData = document.getElementById('submittedData');
+const errorMsg = document.getElementById('errorMsg');
+
+form.addEventListener('submit', function (e) {
+e.preventDefault();
+errorMsg.textContent = '';
+
+// Get values
+const name = document.getElementById('name').value.trim();
+const lastname=document.getElementById('lastname').value.trim();
+const fatherName = document.getElementById('fatherName').value.trim();
+const motherName = document.getElementById('motherName').value.trim();
+const email = document.getElementById('email').value.trim();
+const phone = document.getElementById('phone').value.trim();
+const dob = document.getElementById('dob').value.trim();
+const gender = document.getElementById('gender').value;
+const address = document.getElementById('address').value.trim();
+const course = document.getElementById('course').value.trim();
+const year = document.getElementById('year').value;
+
+// Validation
+if (!name || !fatherName || !motherName || !email || !phone || !dob || !gender || !address || !course || !year) {
+errorMsg.textContent = 'Please fill in all the fields.';
+return;
+}
+
+// Show the submitted data
+submittedData.style.display = 'block';
+submittedData.innerHTML = `
+<h3>Submitted Details:</h3>
+<p><strong>Name:</strong> ${name}</p>
+<p><strong>Last Name:</strong> ${lastname}</p>
+<p><strong>Father's Name:</strong> ${fatherName}</p>
+<p><strong>Mother's Name:</strong> ${motherName}</p>
+<p><strong>Email:</strong> ${email}</p>
+<p><strong>Phone:</strong> ${phone}</p>
+<p><strong>Date of Birth:</strong> ${dob}</p>
+<p><strong>Gender:</strong> ${gender}</p>
+<p><strong>Address:</strong> ${address}</p>
+<p><strong>Course:</strong> ${course}</p>
+<p><strong>Year:</strong> ${year}</p>
+`;
+});
+
+document.getElementById('returnBtn').addEventListener('click', function () {
+form.reset();
+submittedData.style.display = 'none';
+errorMsg.textContent = '';
+});
+</script>
+</body>
+</html>
